@@ -1,1 +1,1 @@
-# Operating-Systems
+# Systemy operacyjne 2024
