@@ -1,0 +1,8 @@
+Number of processes: 10. Time: 0.000884
+Number of processes: 10. Time: 0.000787
+Number of processes: 100. Time: 0.006357
+Number of processes: 100. Time: 0.008513
+Number of processes: 100. Time: 0.012448
+Number of processes: 1000. Time: 0.126945
+Number of processes: 1000. Time: 0.129628
+Number of processes: 100. Time: 0.013193

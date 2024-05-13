@@ -1,0 +1,8 @@
+1. Co sie stanie w dziecku, jesli rodzic nie tam nie wysle. 
+
+2. Co sie stanie w dziecku, jesli deskryptor do zapisu zostanie w rodzicu zamkniety. 
+
+3. Co sie stanie w rodzicu, jesli deskryptor do odczytu zostanie w dziecku zamkniety. 
+
+* Czym jest sigma, blad, hiperparametr. Co jesli zwieksze sigme? (chodzi o te sigme, ktora na poczatku definiujemy).
+* Po narysowaniu 
