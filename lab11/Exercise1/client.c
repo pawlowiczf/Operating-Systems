@@ -14,7 +14,7 @@
 #include <signal.h>
 
 #define BUFFER_SIZE 256
-#define SERVER_IP "127.0.0.1"
+#define SERVER_IP "192.168.1.12"
 int flag = 1; 
 
 void sigHandler (int signal) {
@@ -31,11 +31,14 @@ int main () {
     if (serverSocket == -1) { perror ("Error: socket()"); return EXIT_FAILURE; }
 
     struct sockaddr_in sockAddr; // struktura adresu serwera
-    inet_aton (SERVER_IP, &sockAddr.sin_addr);
-    // sockAddr.sin_addr.s_addr = INADDR_ANY; 
+
+    err = inet_aton (SERVER_IP, &sockAddr.sin_addr);
+    if (err == 0) { perror ("Error - inet_aton()"); return 1; }
+
     sockAddr.sin_family      = AF_INET; 
     sockAddr.sin_port        = htons (9002); 
-    
+    memset (&sockAddr.sin_zero, '\0', 8);
+
     err = connect (serverSocket, (struct sockaddr *) &sockAddr, sizeof(sockAddr)); 
     if (err == -1) { perror ("Error: connect"); return EXIT_FAILURE; }
 
@@ -49,7 +52,7 @@ int main () {
         send (serverSocket, &buffer, strlen (buffer), 0);
     }
 
-    // shutdown (serverSocket, SHUT_RDWR);
+    shutdown (serverSocket, SHUT_RDWR);
     close (serverSocket); 
 
     puts ("Client ended its work");

@@ -1,0 +1,1 @@
+Komunikacja klient -> serwer. Wiadomosci od klienta wypisywane sa na ekranie. Zostalo to zrobione z uzyciem thread pool (kolejka), condition variables i mutexow.

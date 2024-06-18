@@ -1,0 +1,5 @@
+Ustaw na 0 wartosci struktury addr_in (sin_zero), by rozmiar sie zgadzal poleceniem:
+memset (&..., '\0', 8)
+
+sin_size = sizeof(struct sockaddr_in);
+new_fd = accept(sockfd, (struct sockaddr *)&their_addr, &sin_size);

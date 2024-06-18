@@ -12,10 +12,11 @@
 #include <stdio.h>
 #include <pthread.h>
 #include <signal.h>
+#include <string.h>
 
 #define MAX_CONNECTION_NUMBER 10
 #define BUFFER_SIZE 256
-#define SERVER_IP "127.0.0.1"
+#define SERVER_IP "192.168.1.12"
 
 int flag = 1; 
 
@@ -56,10 +57,10 @@ int main () {
 
     struct sockaddr_in sockAddr; 
     inet_aton (SERVER_IP, &sockAddr.sin_addr);
-    // sockAddr.sin_addr.s_addr = INADDR_ANY; 
     sockAddr.sin_family      = AF_INET; 
     sockAddr.sin_port        = htons (9002); 
-    
+    memset (&sockAddr.sin_zero, '\0', 8);
+
     err = bind (serverSocket, (struct sockaddr*) &sockAddr, sizeof(sockAddr));
     if (err == -1) { perror ("Error: bind()"); return EXIT_FAILURE; }
 
@@ -69,7 +70,6 @@ int main () {
     while (flag) {
         //
         int newSocket = accept (serverSocket, NULL, NULL); 
-        if (newSocket == EWOULDBLOCK) { continue; }
         if (newSocket == -1) { perror ("Error: accept()"); return EXIT_FAILURE; }
 
         int* clientSocket = malloc ( sizeof(int) ); 
@@ -77,10 +77,16 @@ int main () {
 
         pthread_create (&thread, NULL, &handleConnection, (int*) clientSocket);
         pthread_detach (thread);
+
+        // Na razie ten server akceptuje tylko jedno polaczenie i wychodzi. 
+        shutdown (serverSocket, SHUT_RDWR);
+        close (serverSocket);
+        flag = 0; 
     }
 
+    shutdown (serverSocket, SHUT_RDWR);
     close ( serverSocket ); 
 
-    puts ("Server ended its work");
-    return 0; 
+    puts ("Main thread ended its work");
+    pthread_exit (0); 
 }

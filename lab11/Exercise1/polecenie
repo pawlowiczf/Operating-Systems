@@ -1,0 +1,2 @@
+Proste programy do komunikacji klient -> serwer. Klient laczy sie i wysyla wiadomosci do serwera, ktore sa wyswietlane w konsoli. Na razie serwer akceptuje tylko jedno polaczenie i wychodzi. 
+Pod ServerIP podstaw swoj ip komputera. Mozesz go sprawdzic wpisujac w konsoli ifconfig. Bedzie on w stylu 192.168.X.X
